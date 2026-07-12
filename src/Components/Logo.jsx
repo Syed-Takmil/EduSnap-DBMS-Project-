@@ -8,7 +8,7 @@ export default function Logo() {
       <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-bold text-lg shadow-md group-hover:bg-indigo-700 transition-colors">
         ES
       </div>
-      <span className="font-extrabold text-xl tracking-tight text-slate-900 dark:text-white">
+      <span className="font-extrabold text-xl tracking-tight text-slate-900 ">
         Edu<span className="text-indigo-600">Snap</span>
       </span>
     </Link>

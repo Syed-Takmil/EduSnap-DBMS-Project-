@@ -2,3 +2,15 @@
 
 
 
+@theme {
+  --color-background: #f8fafc; /* slate-50 */
+  --color-text: #0f172a;       /* slate-900 */
+}
+
+/* Override the browser canvas color scheme */
+:root {
+  color-scheme: light !important;
+}
+
+
+
