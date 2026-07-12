@@ -14,8 +14,8 @@ export default function HeroBanner() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         
         {/* Micro-badge */}
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100 dark:border-indigo-900/50 text-indigo-600 dark:text-indigo-400 text-xs font-semibold uppercase tracking-wider mb-6 animate-pulse">
-          ✨ Next-Gen Course Management System
+        <div className="inline-flex items-center text-white gap-2 px-3 py-1 rounded-full bg-indigo-500 border border-indigo-200   text-xs font-semibold uppercase tracking-wider mb-6 animate-pulse">
+          ✨ Next-Gen Ed-Tech Management System
         </div>
 
         {/* Main Heading */}
@@ -50,17 +50,17 @@ export default function HeroBanner() {
         </div>
 
         {/* Mini Platform Stats / Proof points */}
-        <div className="mt-16 pt-12 border-t border-slate-100 dark:border-slate-900/60 max-w-4xl mx-auto grid grid-cols-3 gap-4 text-center">
+        <div className="mt-16 pt-12 border-t border-slate-300  max-w-4xl mx-auto grid grid-cols-3 gap-4 text-center">
           <div>
-            <div className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">50+</div>
+            <div className="text-2xl sm:text-3xl font-bold text-slate-900 ">50+</div>
             <div className="text-xs sm:text-sm text-slate-500">Expert Courses</div>
           </div>
           <div>
-            <div className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">10k+</div>
+            <div className="text-2xl sm:text-3xl font-bold text-slate-900 ">10k+</div>
             <div className="text-xs sm:text-sm text-slate-500">Active Students</div>
           </div>
           <div>
-            <div className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">99%</div>
+            <div className="text-2xl sm:text-3xl font-bold text-slate-900 ">99%</div>
             <div className="text-xs sm:text-sm text-slate-500">Exam Pass Rate</div>
           </div>
         </div>

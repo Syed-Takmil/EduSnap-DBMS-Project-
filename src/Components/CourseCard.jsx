@@ -1,3 +1,5 @@
+
+
 import React from 'react';
 import { ArrowRight } from '@gravity-ui/icons';
 import Image from 'next/image';
@@ -8,11 +10,14 @@ export default function CourseCard({ course }) {
       
       {/* Course Image Wrapper */}
       <div className="relative aspect-video w-full overflow-hidden bg-slate-100">
-        <img
+        <Image
+        width={100}
+        height={100}
           src={course.image} 
           alt={course.name}
           className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
-          loading="lazy"
+          priority={true} /* 🚀 THIS FIXES THE LCP WARNING */
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         {/* Soft overlay gradient */}
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900/10 to-transparent pointer-events-none" />
@@ -38,10 +43,15 @@ export default function CourseCard({ course }) {
         </div>
 
         {/* CTA Button at the bottom */}
-        <button className="w-full flex items-center justify-center gap-1.5 h-10 px-4 rounded-xl text-xs font-semibold bg-slate-50 hover:bg-indigo-600 text-slate-700 hover:text-white border border-slate-200 hover:border-indigo-600 transition-all duration-200">
-          View Program Modules
+    <div className='grid gap-2'>
+          <button className="w-full flex items-center justify-center gap-1.5 h-10 px-4 rounded-xl text-xs font-semibold bg-slate-50  text-slate-700 hover:text-black border border-slate-200 hover:border-indigo-600 transition-all duration-200">
+          View Details
           <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-0.5 transition-transform" />
         </button>
+         <button className="w-full flex items-center justify-center gap-1.5 h-10 px-4 rounded-xl text-xs font-semibold bg-indigo-600 hover:bg-indigo-600  hover:text-white border text-white border-slate-200 hover:border-indigo-600 transition-all duration-200">
+          Enroll Now
+        </button>
+    </div>
       </div>
 
     </div>

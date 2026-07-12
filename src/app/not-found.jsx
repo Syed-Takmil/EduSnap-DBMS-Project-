@@ -13,7 +13,7 @@ export default function NotFound() {
           <div className="absolute inset-0 m-auto w-32 h-32 bg-sky-100 rounded-full blur-xl opacity-70" />
           
           <div className="relative w-24 h-24 bg-white rounded-2xl shadow-xl shadow-sky-100 border border-sky-100 flex items-center justify-center text-indigo-600">
-            <Compass className="w-12 h-12 animate-spin-slow" style={{ animationDuration: '8s' }} />
+            <Compass className="w-12 h-12 animate-spin-slow" style={{ animationDuration: '18s' }} />
           </div>
           
           {/* 404 Badge Floating */}
@@ -25,10 +25,10 @@ export default function NotFound() {
         {/* Text Content */}
         <div className="space-y-3">
           <h1 className="text-3xl font-extrabold text-slate-950 tracking-tight sm:text-4xl">
-            Classroom Not Found
+             Not Found
           </h1>
           <p className="text-base text-slate-600 max-w-xs mx-auto leading-relaxed">
-            Oops! It looks like this course route doesn't exist, or the lesson has been archived by the administrator.
+            Oops! It looks like this course route doesn't exist or has been removed
           </p>
         </div>
 
