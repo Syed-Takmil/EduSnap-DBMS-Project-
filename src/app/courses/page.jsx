@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import CourseCard from '@/components/CourseCard';
+import CustomLoading from '@/Components/shared/CustomLoading';
 
 export default function CoursePage() {
   const [courses, setCourses] = useState([]);
@@ -22,7 +23,10 @@ export default function CoursePage() {
   }, []);
 
   if (loading) {
-    return <div className="p-8 text-center text-slate-500">Loading courses...</div>;
+    return <div className="p-8 text-center text-slate-500">
+        <CustomLoading/>
+        Loading courses..
+    .</div>;
   }
 
   return (
