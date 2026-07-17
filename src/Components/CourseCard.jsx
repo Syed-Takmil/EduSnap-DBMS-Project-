@@ -6,6 +6,7 @@
 import React from 'react';
 import { ArrowRight } from '@gravity-ui/icons';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function CourseCard({ course }) {
   return (
@@ -47,10 +48,10 @@ export default function CourseCard({ course }) {
 
         {/* CTA Button at the bottom */}
     <div className='grid gap-2'>
-          <button className="w-full flex items-center justify-center gap-1.5 h-10 px-4 rounded-xl text-xs font-semibold bg-slate-50  text-slate-700 hover:text-black border border-slate-200 hover:border-indigo-600 transition-all duration-200">
+          <Link href={`/courses/${course.id}`} className="w-full flex items-center justify-center gap-1.5 h-10 px-4 rounded-xl text-xs font-semibold bg-slate-50  text-slate-700 hover:text-black border border-slate-200 hover:border-indigo-600 transition-all duration-200">
           View Details
           <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-0.5 transition-transform" />
-        </button>
+        </Link>
          <button className="w-full flex items-center justify-center gap-1.5 h-10 px-4 rounded-xl text-xs font-semibold bg-indigo-600 hover:bg-indigo-600  hover:text-white border text-white border-slate-200 hover:border-indigo-600 transition-all duration-200">
           Enroll Now
         </button>

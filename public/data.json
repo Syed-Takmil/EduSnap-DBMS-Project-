@@ -3,54 +3,203 @@
     "id": "crs_001",
     "name": "Full-Stack Web Development Masterclass",
     "description": "Accelerate your developer career by mastering modern front-end and back-end web frameworks. This extensive course deep dives into the core architectures of React, Next.js, Node.js, and advanced database modeling. You will learn how to design scalable RESTful APIs, manage complex asynchronous data states, implement secure token-based authentication protocols, and deploy production-ready cloud architectures using modern CI/CD integration strategies.",
-    "image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80"
+    "image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80",
+    "price": 8500,
+    "duration": "6 Months",
+    "lessons": 72,
+    "highlights": [
+      "1-on-1 dedicated mentor support & code reviews",
+      "Building and deploying 4 enterprise-grade projects",
+      "Comprehensive job placement & resume building assistance",
+      "Lifetime access to all recorded lectures & codebase resources"
+    ],
+    "curriculum": [
+      "Module 1: Modern JavaScript & React.js Foundations",
+      "Module 2: Server-Side Rendering & App Routing with Next.js",
+      "Module 3: Backend Architectures with Node.js & Express",
+      "Module 4: Relational & Non-Relational Databases (PostgreSQL, MongoDB)",
+      "Module 5: Secure Authentication (JWT, Auth0) & Web Security",
+      "Module 6: CI/CD, Containerization (Docker), & Cloud Deployment"
+    ]
   },
   {
     "id": "crs_002",
     "name": "Advanced UI/UX Product Design & Systematics",
     "description": "Go beyond standard user interface creation and explore the comprehensive mechanics of human-centered digital experiences. This curriculum covers deep user psychology research methodologies, wireframe prototyping, comprehensive responsive typography layouts, and interactive design systems. By the end of this module, you will be designing enterprise-grade application wireframes, conducting insightful usability testing loops, and creating pixel-perfect components ready for engineering hand-off.",
-    "image": "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?auto=format&fit=crop&w=800&q=80"
+    "image": "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?auto=format&fit=crop&w=800&q=80",
+    "price": 6000,
+    "duration": "4 Months",
+    "lessons": 48,
+    "highlights": [
+      "Hands-on Figma Design System building exercises",
+      "Live client case-study project development",
+      "UX Research portfolio presentation coaching",
+      "Regular design reviews by industry professionals"
+    ],
+    "curriculum": [
+      "Module 1: Foundations of Human-Centered Design & Psychology",
+      "Module 2: User Research, Personas, and Information Architecture",
+      "Module 3: Wireframing, Low-Fidelity Layouts, & Figma Essentials",
+      "Module 4: Building Scalable Design Systems (Grids, Typography, Components)",
+      "Module 5: Interactive Prototyping & Micro-interactions",
+      "Module 6: Usability Testing, Feedback Loops, & Developer Handoff"
+    ]
   },
   {
     "id": "crs_003",
     "name": "Data Science, Machine Learning, & AI Core",
     "description": "Unlock the power of raw organizational data utilizing advanced machine learning and statistical modeling parameters. This detailed course introduces data pipeline sanitization structures, deep explorative analytics, supervised learning models, and complex predictive neural network arrays. You will develop custom Python architectures utilizing libraries like Pandas, NumPy, and Scikit-Learn to parse large-scale datasets, extract business metrics, and deploy dynamic machine learning algorithms.",
-    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80"
+    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+    "price": 9500,
+    "duration": "6 Months",
+    "lessons": 80,
+    "highlights": [
+      "Working on real-world datasets from Kaggle & corporate partners",
+      "Step-by-step introduction to math and statistics for ML",
+      "Deploying machine learning models as live APIs",
+      "Dedicated GPU computing environment for training deep networks"
+    ],
+    "curriculum": [
+      "Module 1: Python Programming, NumPy, & Pandas Fundamentals",
+      "Module 2: Exploratory Data Analysis & Advanced Data Visualization",
+      "Module 3: Linear & Logistic Regression, Decision Trees, & Random Forests",
+      "Module 4: Unsupervised Learning (K-Means Clustering, PCA)",
+      "Module 5: Introduction to Deep Learning with PyTorch & Neural Networks",
+      "Module 6: Model Deployment with Docker and Streamlit"
+    ]
   },
   {
     "id": "crs_004",
     "name": "Cloud Native Architecture & Systems Engineering",
     "description": "Learn to manage, monitor, and scale distributed containerized environments under massive operational request loads. This highly technical engineering course bridges the foundational gaps between manual system operations and high-velocity cloud orchestration. You will design reliable application blueprints utilizing Docker environments, Kubernetes orchestration grids, automated infrastructure provisioning via Terraform, and real-time cloud diagnostic dashboards.",
-    "image": "https://images.unsplash.com/photo-1600132806370-bf17e65e942f?auto=format&fit=crop&w=800&q=80"
+    "image": "https://images.unsplash.com/photo-1600132806370-bf17e65e942f?auto=format&fit=crop&w=800&q=80",
+    "price": 11000,
+    "duration": "5 Months",
+    "lessons": 60,
+    "highlights": [
+      "Hands-on experience with AWS, GCP, and Azure environments",
+      "Learn to manage real, live Kubernetes clusters",
+      "Master Infrastructure as Code (IaC) with Terraform",
+      "Preparation pathways for AWS Solution Architect exams"
+    ],
+    "curriculum": [
+      "Module 1: Linux Administration & Core Networking Concepts",
+      "Module 2: Containerization with Docker & Multi-stage Builds",
+      "Module 3: Kubernetes Architecture, Pod Management, & Orchestration",
+      "Module 4: Infrastructure Automation & Provisioning with Terraform",
+      "Module 5: Setting up robust CI/CD Pipelines (GitHub Actions, Jenkins)",
+      "Module 6: Monitoring & Logging with Prometheus, Grafana, & ELK Stack"
+    ]
   },
   {
     "id": "crs_005",
     "name": "Class 8 JSC Excellence Academic Program",
     "description": "Build a rock-solid foundation for high school board excellence. This highly structured academic program completely covers the latest National Curriculum guidelines, focusing deeply on Mathematics, General Science, English, and ICT. Our program features comprehensive textbook deep-dives, chapter-wise analytical question solving, real-time pop quizzes, and conceptual clarity sessions designed to transition young students smoothly into complex science topics in later classes.",
-    "image": "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=800&q=80"
+    "image": "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=800&q=80",
+    "price": 3500,
+    "duration": "8 Months",
+    "lessons": 120,
+    "highlights": [
+      "Full coverage of the national creative question (CQ) system",
+      "Chapter-wise comprehensive lecture sheets and summaries",
+      "Weekly diagnostic tests with personal progress tracking",
+      "Dedicated interactive problem-solving classes every Friday"
+    ],
+    "curriculum": [
+      "Unit 1: Core Mathematics (Arithmetic, Algebra, & Geometry)",
+      "Unit 2: General Science (Conceptual Physics, Chemistry & Biology basics)",
+      "Unit 3: Advanced English Grammar, Vocabulary, & Writing Mastery",
+      "Unit 4: Information & Communication Technology (ICT) Core",
+      "Unit 5: Revision Classes & Board Question Analysis Models",
+      "Unit 6: Complete Simulated Board Exams & Evaluation"
+    ]
   },
   {
     "id": "crs_006",
     "name": "Class 9-10 (SSC) Physics & Chemistry Core Program",
     "description": "Master the core conceptual layers of secondary physical sciences. This intensive program breaks down tricky textbook chapters into engaging, logic-driven visual modules. Students will practice extensive mathematical physics derivations, explore comprehensive chemical equation balance techniques, analyze years of creative board questions (CQ), and tackle rapid-fire multiple-choice grids (MCQ) to secure a guaranteed GPA 5.0 in the upcoming SSC board examinations.",
-    "image": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=800&q=80"
+    "image": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=800&q=80",
+    "price": 4500,
+    "duration": "10 Months",
+    "lessons": 150,
+    "highlights": [
+      "Full textbook coverage & custom mathematical equation sheets",
+      "Over 1000+ board-standard Creative Questions (CQ) solved in class",
+      "Dedicated preparation booklets for Practical Lab Examinations",
+      "Instant 24/7 web-portal Q&A dashboard with expert teachers"
+    ],
+    "curriculum": [
+      "Physics Unit 1: Mechanics, Motion, Force, & Energy Mechanics",
+      "Physics Unit 2: Waves, Sound, Light Reflection, & Current Electricity",
+      "Chemistry Unit 1: Matter, Periodic Table, & Chemical Bonds",
+      "Chemistry Unit 2: Acid-Base Reactions, Organic Chemistry, & Metallic Properties",
+      "Special Unit: Integrated Board CQ & MCQ Test-Prep Practice",
+      "Mock Finals: Grand Board Simulation series with diagnostic evaluations"
+    ]
   },
   {
     "id": "crs_007",
     "name": "SSC Complete Final Model Test Pack",
     "description": "The ultimate simulation blueprint for secondary board exam aspirants. Designed precisely on the standard board question patterns, this robust model test package includes comprehensive syllabus evaluation tests, subject-wise paper analysis assessments, and full-length simulated board layout examinations. Each exam is followed by an interactive, detailed explanation class where instructors break down marking criteria, common mistakes, and time-management strategies.",
-    "image": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=800&q=80"
+    "image": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=800&q=80",
+    "price": 2500,
+    "duration": "2 Months",
+    "lessons": 30,
+    "highlights": [
+      "30 exact board-mirror mock test papers evaluated by examiners",
+      "OMR script scanning and rapid automatic evaluation system",
+      "Nationwide merit positioning among thousands of local students",
+      "Exclusive revision booklets containing high-yield formula collections"
+    ],
+    "curriculum": [
+      "Phase 1: Subject-Wise Chapter Outline Tests (Physics, Chem, Math, Biology)",
+      "Phase 2: Combined Subject Papers (Paper I & Paper II Evaluation)",
+      "Phase 3: High-Yield Revision and Error Correction Sessions",
+      "Phase 4: Full-Length Complete SSC Syllabus Mirror Examinations"
+    ]
   },
   {
     "id": "crs_008",
     "name": "Class 11-12 (HSC) Higher Mathematics Full Course",
     "description": "Conquer the advanced engineering and university admission foundation concepts. This academic syllabus deep-dives comprehensively into Calculus (Differentiation & Integration), Complex Numbers, Coordinate Geometry, Vectors, and Linear Programming matrices. Engineered for students targeting top-tier engineering universities and boards alike, this curriculum synthesizes standard textbook theory with high-velocity shortcut tricks required for competitive exams.",
-    "image": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=800&q=80"
+    "image": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=800&q=80",
+    "price": 5500,
+    "duration": "12 Months",
+    "lessons": 180,
+    "highlights": [
+      "Complete deep dive into BUET & engineering math question banks",
+      "Detailed calculus visualizations to simplify integration concepts",
+      "Step-by-step analytical breakdowns of 1st and 2nd paper equations",
+      "Includes 24 mock tests matching current HSC board guidelines"
+    ],
+    "curriculum": [
+      "Math Paper I - Unit 1: Matrices, Determinants, & Coordinate Geometry",
+      "Math Paper I - Unit 2: Trigonometric Ratios & Calculus (Limits, Differentiation)",
+      "Math Paper I - Unit 3: Integral Calculus & Vector Geometries",
+      "Math Paper II - Unit 1: Complex Numbers & Quadratic Equations",
+      "Math Paper II - Unit 2: Statics, Dynamics, & Mechanics Concept Arrays",
+      "HSC Prep: Complete CQ & MCQ High-Speed Problem Resolution Systems"
+    ]
   },
   {
     "id": "crs_009",
     "name": "HSC Mega Board & University Admission Model Test Series",
     "description": "Bridge the high-stakes gap between the board curriculum and elite university entry standards. This hyper-competitive model test ecosystem challenges students with dual-mode testing arrays containing regular board-compliant subjective blueprints as well as rigorous analytical admission-style problems. Features nationwide comparative merit positioning dashboards, custom performance metrics, and pinpoint error tracking for engineering and medical options.",
-    "image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80"
+    "image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80",
+    "price": 4000,
+    "duration": "3 Months",
+    "lessons": 45,
+    "highlights": [
+      "Exams engineered by BUET, Dhaka University, and DMC graduates",
+      "Dual evaluation: HSC Board Written style & Engineering Written/MCQ",
+      "Intense diagnostic feedback pointing out specific mathematical bugs",
+      "Personalized portal featuring mistake history analysis logs"
+    ],
+    "curriculum": [
+      "Phase 1: Combined Chapter Diagnostics (Both 1st & 2nd Papers)",
+      "Phase 2: High-Velocity BUET & Medical Standard Admission Tests",
+      "Phase 3: Interactive Problem Solving & Formula Refinement Masterclasses",
+      "Phase 4: Full-Scale Mock Admission Tests (Engineering & Varsity Options)"
+    ]
   }
 ]

@@ -12,8 +12,7 @@ export default function Footer() {
     explore: [
       { name: 'Browse Courses', href: '/courses' },
       { name: 'Top Instructors', href: '/teachers' },
-      { name: 'Pricing Plans', href: '/pricing' },
-      { name: 'FAQ', href: '/faq' },
+      { name: 'FAQ', href: '/#faq' },
     ],
     onboarding: [
       { name: 'Apply as Teacher', href: '/apply' },
