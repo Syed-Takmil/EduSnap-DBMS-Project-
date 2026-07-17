@@ -1,5 +1,8 @@
 
 
+
+
+
 import React from 'react';
 import { ArrowRight } from '@gravity-ui/icons';
 import Image from 'next/image';
