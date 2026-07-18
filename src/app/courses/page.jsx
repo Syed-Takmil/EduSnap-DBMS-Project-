@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import CourseCard from '@/components/CourseCard';
+import CourseCard from '../../Components/CourseCard';
 import CustomLoading from '@/Components/shared/CustomLoading';
 
 export default function CoursePage() {

@@ -7,8 +7,10 @@ import React from 'react';
 import { ArrowRight } from '@gravity-ui/icons';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function CourseCard({ course }) {
+  
   return (
     <div className="group bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-indigo-100/50 hover:border-indigo-100 transition-all duration-300 flex flex-col overflow-hidden h-full">
       
@@ -52,9 +54,9 @@ export default function CourseCard({ course }) {
           View Details
           <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-0.5 transition-transform" />
         </Link>
-         <button className="w-full flex items-center justify-center gap-1.5 h-10 px-4 rounded-xl text-xs font-semibold bg-indigo-600 hover:bg-indigo-600  hover:text-white border text-white border-slate-200 hover:border-indigo-600 transition-all duration-200">
+           <Link href={'/confirm-payment'} className="w-full flex items-center justify-center gap-1.5 h-10 px-4 rounded-xl text-xs font-semibold bg-indigo-600 hover:bg-indigo-600  hover:text-white border text-white border-slate-200 hover:border-indigo-600 transition-all duration-200">
           Enroll Now
-        </button>
+       </Link>
     </div>
       </div>
 
