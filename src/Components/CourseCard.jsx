@@ -1,65 +1,68 @@
-
-
-
-
-
+// components/CourseCard.jsx
 import React from 'react';
-import { ArrowRight } from '@gravity-ui/icons';
-import Image from 'next/image';
+import { ArrowRight, LayoutHeader } from '@gravity-ui/icons';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
 export default function CourseCard({ course }) {
-  
+  const formattedPrice = course?.price
+    ? Number(course.price).toLocaleString('en-US')
+    : 'N/A';
+
+  const isAssessment = course?.title?.includes('Model Test');
+
   return (
-    <div className="group bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-indigo-100/50 hover:border-indigo-100 transition-all duration-300 flex flex-col overflow-hidden h-full">
-      
-      {/* Course Image Wrapper */}
-      <div className="relative aspect-video w-full overflow-hidden bg-slate-100">
-        <Image
-        width={100}
-        height={100}
-          src={course.image} 
-          alt={course.name}
-          className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
-          priority={true} /* 🚀 THIS FIXES THE LCP WARNING */
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        />
-        {/* Soft overlay gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/10 to-transparent pointer-events-none" />
+    <div className="group bg-[#FBF9F4] rounded-2xl border border-stone-200 shadow-sm hover:shadow-xl hover:shadow-slate-900/10 hover:border-amber-300/60 transition-all duration-300 flex flex-col justify-between overflow-hidden h-full">
+      {/* Decorative Header Banner */}
+      <div className="relative h-28 bg-linear-to-br from-[#0B1524] via-[#122036] to-[#1B2A44] p-5 flex flex-col justify-between overflow-hidden">
+        <div className="absolute -right-6 -bottom-6 w-28 h-28 bg-amber-400/20 rounded-full blur-2xl pointer-events-none group-hover:scale-150 transition-transform duration-500" />
+        <div className="absolute inset-0 opacity-[0.04] bg-[radial-gradient(circle_at_1px_1px,white_1px,transparent_0)] bg-[length:16px_16px] pointer-events-none" />
+
+        {/* Category Badge & Price */}
+        <div className="flex items-center justify-between relative z-10">
+          <span className="inline-flex items-center gap-1.5 text-[10px] font-bold tracking-widest uppercase bg-white/10 backdrop-blur-md text-amber-200 px-2.5 py-1 rounded-lg border border-white/10">
+            {isAssessment ? '🏆 Assessment' : '📖 Program'}
+          </span>
+          <span className="text-sm font-black text-amber-50 bg-black/30 backdrop-blur-md px-3 py-1 rounded-lg border border-amber-400/20">
+            ৳{formattedPrice}
+          </span>
+        </div>
+
+        <div className="relative z-10 self-start text-amber-200/80">
+          <LayoutHeader className="w-6 h-6" />
+        </div>
       </div>
 
       {/* Course Details Text Section */}
       <div className="p-5 flex flex-col flex-grow justify-between space-y-4">
-        <div className="space-y-2">
-          {/* Dynamic Academic Tag Generation */}
-          <div className="inline-block text-[11px] font-bold tracking-wider uppercase bg-sky-50 text-indigo-600 px-2.5 py-1 rounded-md border border-sky-100">
-            {course.name.includes("Model Test") ? "🏆 Assessment" : "📖 Academic Program"}
-          </div>
-
-          {/* Title */}
-          <h3 className="text-lg font-bold text-slate-900 tracking-tight group-hover:text-indigo-600 transition-colors line-clamp-1">
-            {course.name}
+        <div className="space-y-2.5">
+          <h3 className="text-lg font-bold text-slate-900 tracking-tight group-hover:text-[#122036] transition-colors line-clamp-2">
+            {course?.title}
           </h3>
-
-          {/* Large Description block with strict multi-line truncation */}
           <p className="text-sm text-slate-500 leading-relaxed line-clamp-3">
-            {course.description}
+            {course?.description}
           </p>
         </div>
 
-        {/* CTA Button at the bottom */}
-    <div className='grid gap-2'>
-          <Link href={`/courses/${course.id}`} className="w-full flex items-center justify-center gap-1.5 h-10 px-4 rounded-xl text-xs font-semibold bg-slate-50  text-slate-700 hover:text-black border border-slate-200 hover:border-indigo-600 transition-all duration-200">
-          View Details
-          <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-0.5 transition-transform" />
-        </Link>
-           <Link href={'/confirm-payment'} className="w-full flex items-center justify-center gap-1.5 h-10 px-4 rounded-xl text-xs font-semibold bg-indigo-600 hover:bg-indigo-600  hover:text-white border text-white border-slate-200 hover:border-indigo-600 transition-all duration-200">
-          Enroll Now
-       </Link>
-    </div>
+        {/* CTA Buttons */}
+        <div className="grid gap-2 pt-4 border-t border-stone-200">
+          <Link
+            href={`/courses/${course?.courseId}`}
+            className="w-full flex items-center justify-center gap-1.5 h-10 px-4 rounded-xl text-xs font-semibold bg-white text-slate-700 hover:text-slate-900 hover:bg-stone-100 border border-stone-200 transition-all duration-200"
+          >
+            View Details
+            <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-0.5 transition-transform" />
+          </Link>
+          <Link
+            href={{
+              pathname: '/confirm-payment',
+              query: { courseId: course?.courseId },
+            }}
+            className="w-full flex items-center justify-center gap-1.5 h-10 px-4 rounded-xl text-xs font-bold bg-amber-400 hover:bg-amber-300 text-[#0B1524] transition-all duration-200 shadow-sm shadow-amber-400/30"
+          >
+            Enroll Now
+          </Link>
+        </div>
       </div>
-
     </div>
   );
 }

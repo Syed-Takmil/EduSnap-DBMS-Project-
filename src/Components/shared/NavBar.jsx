@@ -13,7 +13,7 @@ export default function NavBar() {
     { name: 'Courses', href: '/courses' },
     { name: 'Apply as Teacher', href: '/apply' },
     { name: 'About Us', href: '/about' },
-    { name: 'Contact Us', href: '/contact' },
+    { name: 'Dashboard', href: '/dashboard' },
   ];
 
   return (
