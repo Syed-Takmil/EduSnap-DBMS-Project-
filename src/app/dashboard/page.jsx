@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://edu-snap-dbms-api.vercel.app/api';
 
@@ -9,6 +10,7 @@ export default function StudentDashboard({ studentId = 1 }) {
   const [enrollments, setEnrollments] = useState([]);
   const [schedules, setSchedules] = useState([]);
   const [examAttempts, setExamAttempts] = useState([]);
+  const [availableExams, setAvailableExams] = useState([]);
   const [payments, setPayments] = useState([]);
 
   useEffect(() => {
@@ -16,7 +18,7 @@ export default function StudentDashboard({ studentId = 1 }) {
       try {
         setLoading(true);
 
-        // 1. Fetch ALL Courses first to create a master title map
+        // 1. Fetch ALL Courses first for master title lookup
         const allCoursesRes = await fetch(`${API_BASE_URL}/courses`);
         let allCourses = [];
         if (allCoursesRes.ok) {
@@ -24,7 +26,6 @@ export default function StudentDashboard({ studentId = 1 }) {
           allCourses = allCoursesJson.data || [];
         }
 
-        // Build master course lookup: { 1: "Web Development", 2: "UI/UX Design Masterclass", ... }
         const courseTitleMap = allCourses.reduce((acc, c) => {
           acc[c.courseId] = c.title || c.name || `Course #${c.courseId}`;
           return acc;
@@ -38,7 +39,6 @@ export default function StudentDashboard({ studentId = 1 }) {
           fetchedPayments = paymentsJson.data || [];
         }
 
-        // Attach real course titles to payments
         const enrichedPayments = fetchedPayments.map((p) => ({
           ...p,
           courseTitle: courseTitleMap[p.courseId] || `Course #${p.courseId}`,
@@ -52,7 +52,6 @@ export default function StudentDashboard({ studentId = 1 }) {
           const enrollmentsJson = await enrollmentsRes.json();
           activeEnrollments = enrollmentsJson.data || [];
 
-          // Enrich enrollments with titles from master list
           const enrichedEnrollments = activeEnrollments.map((item) => ({
             ...item,
             title: item.title || courseTitleMap[item.courseId] || `Course #${item.courseId}`,
@@ -62,7 +61,7 @@ export default function StudentDashboard({ studentId = 1 }) {
 
         // 4. Fetch Routines & Exams dynamically per enrolled course
         if (activeEnrollments.length > 0) {
-          // Fetch Schedules and attach exact course titles from master map
+          // Fetch Schedules
           const schedulePromises = activeEnrollments.map((item) =>
             fetch(`${API_BASE_URL}/routines/course/${item.courseId}`)
               .then((res) => (res.ok ? res.json() : { data: [] }))
@@ -70,20 +69,29 @@ export default function StudentDashboard({ studentId = 1 }) {
                 const list = res.data || [];
                 return list.map((sched) => ({
                   ...sched,
-                  // Resolves real title (e.g. "UI/UX Design Masterclass")
                   courseTitle: courseTitleMap[sched.courseId] || courseTitleMap[item.courseId] || `Course #${sched.courseId}`,
                 }));
               })
               .catch(() => [])
           );
 
-          // Fetch Exams and map attempts with correct course + exam details
+          // Fetch Exams and map both Available Exams + Exam Attempts
+          const allExamsArr = [];
           const examPromises = activeEnrollments.map((item) =>
             fetch(`${API_BASE_URL}/exams/course/${item.courseId}`)
               .then((res) => (res.ok ? res.json() : { data: [] }))
               .then(async (examsJson) => {
                 const exams = examsJson.data || [];
 
+                // Store exams for the "Take Exam" section
+                exams.forEach((ex) => {
+                  allExamsArr.push({
+                    ...ex,
+                    courseTitle: courseTitleMap[item.courseId] || `Course #${item.courseId}`,
+                  });
+                });
+
+                // Fetch student attempts for each exam
                 const attemptsArr = await Promise.all(
                   exams.map((exam) =>
                     fetch(`${API_BASE_URL}/exams/${exam.examId}/attempts/${studentId}`)
@@ -111,6 +119,7 @@ export default function StudentDashboard({ studentId = 1 }) {
 
           setSchedules(fetchedSchedules.flat());
           setExamAttempts(fetchedAttempts.flat());
+          setAvailableExams(allExamsArr);
         }
       } catch (error) {
         console.error('Error fetching dashboard data:', error);
@@ -127,9 +136,9 @@ export default function StudentDashboard({ studentId = 1 }) {
 
   const avgMarks = examAttempts.length
     ? Math.round(
-      examAttempts.reduce((acc, curr) => acc + (Number(curr.marksObtained) || 0), 0) /
-      examAttempts.length
-    )
+        examAttempts.reduce((acc, curr) => acc + (Number(curr.marksObtained) || 0), 0) /
+          examAttempts.length
+      )
     : 0;
 
   if (loading) {
@@ -162,7 +171,7 @@ export default function StudentDashboard({ studentId = 1 }) {
 
       {/* Main Content Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Left Column: Live Schedules & Enrolled Courses */}
+        {/* Left Column: Live Schedules & Take Exam Section */}
         <div className="lg:col-span-2 space-y-8">
           {/* Routine Schedule Card */}
           <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
@@ -205,28 +214,47 @@ export default function StudentDashboard({ studentId = 1 }) {
             )}
           </div>
 
-          {/* Enrolled Courses Progress */}
-          {/* <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
-            <h2 className="text-xl font-bold text-slate-900 mb-4">Enrolled Courses</h2>
+          {/* NEW: Take Exam / Quiz Section */}
+          <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+            <h2 className="text-xl font-bold text-slate-900 mb-1 flex items-center gap-2">
+              📝 Available Exams & Quizzes
+            </h2>
+            <p className="text-slate-500 text-xs mb-4">
+              Select an assessment from your enrolled courses to attempt and record your score.
+            </p>
+
             <div className="space-y-4">
-              {enrollments.map((course) => (
-                <div key={course.courseId} className="border border-slate-200 p-4 rounded-xl bg-slate-50">
-                  <div className="flex justify-between items-center mb-2">
-                    <h4 className="font-bold text-slate-900 text-base">{course.title || course.name}</h4>
-                    <span className="text-xs font-bold bg-[#0F172A] text-amber-400 px-2.5 py-1 rounded capitalize">
-                      {course.status || 'Active'}
-                    </span>
+              {availableExams.length > 0 ? (
+                availableExams.map((exam) => (
+                  <div
+                    key={exam.examId}
+                    className="border border-slate-200 p-4 rounded-xl bg-slate-50 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                  >
+                    <div>
+                      <span className="text-[10px] font-bold text-amber-700 bg-amber-100 px-2 py-0.5 rounded uppercase">
+                        {exam.courseTitle}
+                      </span>
+                      <h4 className="font-bold text-slate-900 text-base mt-1">
+                        {exam.title || `Exam #${exam.examId}`}
+                      </h4>
+                      <p className="text-xs text-slate-500 mt-0.5">
+                        Max Marks: <strong className="text-slate-800">{exam.maxMarks}</strong> | Passing Marks: <strong className="text-slate-800">{exam.passingMarks}</strong> | Duration: {exam.durationMinutes || 30} mins [cite: 94]
+                      </p>
+                    </div>
+
+                    <Link
+                      href={`/dashboard/take_exam?examId=${exam.examId}&studentId=${studentId}`}
+                      className="bg-[#0F172A] hover:bg-slate-800 text-amber-400 font-bold px-5 py-2.5 rounded-xl text-xs transition text-center shrink-0 shadow-sm"
+                    >
+                      Take Exam Now →
+                    </Link>
                   </div>
-                  <p className="text-xs text-slate-500 mb-3 line-clamp-2">
-                    {course.description || 'No course description available.'}
-                  </p>
-                  <div className="w-full bg-slate-200 rounded-full h-2.5">
-                    <div className="bg-amber-500 h-2.5 rounded-full" style={{ width: `70%` }}></div>
-                  </div>
-                </div>
-              ))}
+                ))
+              ) : (
+                <p className="text-slate-500 text-sm py-2">No active exams available right now.</p>
+              )}
             </div>
-          </div> */}
+          </div>
         </div>
 
         {/* Right Column: Exam Performances & Payment History */}
@@ -260,8 +288,9 @@ export default function StudentDashboard({ studentId = 1 }) {
                           {attempt.marksObtained} Marks
                         </span>
                         <span
-                          className={`text-[10px] font-bold px-2 py-0.5 rounded-full inline-block mt-0.5 ${isPassed ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'
-                            }`}
+                          className={`text-[10px] font-bold px-2 py-0.5 rounded-full inline-block mt-0.5 ${
+                            isPassed ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'
+                          }`}
                         >
                           {isPassed ? 'Passed' : 'Failed'}
                         </span>

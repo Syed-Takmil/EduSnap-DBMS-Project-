@@ -2,22 +2,77 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-
+import { useRouter } from 'next/navigation';
 import { Person, Lock, Eye, EyeSlash, ChevronRight, ChartBar, Star } from '@gravity-ui/icons';
 
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://edu-snap-dbms-api.vercel.app/api';
+
 export default function LoginPage() {
+  const router = useRouter();
+
   const [formData, setFormData] = useState({ email: '', password: '', role: 'student' });
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    // Mimic standard server processing buffer
-    setTimeout(() => {
+    setErrorMessage('');
+
+    try {
+      // Determine the API resource according to selected role
+      let endpoint = '';
+      if (formData.role === 'student') endpoint = '/students';
+      else if (formData.role === 'teacher') endpoint = '/teachers';
+      else if (formData.role === 'admin') endpoint = '/admins';
+
+      // 1. Fetch user records for selected profile role
+      const response = await fetch(`${API_BASE_URL}${endpoint}`);
+      if (!response.ok) {
+        throw new Error('Failed to connect to authentication server.');
+      }
+
+      const result = await response.json();
+      const userList = result.data || [];
+
+      // 2. Locate user matching the entered email
+      const targetUser = userList.find(
+        (user) => user.email.toLowerCase() === formData.email.trim().toLowerCase()
+      );
+
+      if (!targetUser) {
+        throw new Error(`No ${formData.role} account found with that email address.`);
+      }
+
+      // 3. Extract primary entity ID key dynamically (studentId, teacherId, or adminId)
+      const userId = targetUser.studentId || targetUser.teacherId || targetUser.adminId || targetUser.id;
+
+      // 4. Save User Session to localStorage
+      const sessionData = {
+        id: userId,
+        name: targetUser.name,
+        email: targetUser.email,
+        role: formData.role,
+        isLoggedIn: true,
+      };
+
+      localStorage.setItem('eduSnap_user', JSON.stringify(sessionData));
+
+      // 5. Redirect user to their respective portal
+      if (formData.role === 'student') {
+        router.push(`/dashboard?studentId=${userId}`);
+      } else if (formData.role === 'teacher') {
+        router.push(`/teacher-dashboard?teacherId=${userId}`);
+      } else if (formData.role === 'admin') {
+        router.push(`/admin-dashboard?adminId=${userId}`);
+      }
+    } catch (err) {
+      console.error('Login error:', err);
+      setErrorMessage(err.message || 'An error occurred during sign in.');
+    } finally {
       setLoading(false);
-      alert(`Logged in successfully as ${formData.role}!`);
-    }, 1500);
+    }
   };
 
   return (
@@ -38,6 +93,13 @@ export default function LoginPage() {
             </p>
           </div>
 
+          {/* Error Alert Box */}
+          {errorMessage && (
+            <div className="p-3.5 bg-rose-50 border border-rose-200 rounded-xl text-rose-700 text-xs font-semibold animate-[fadeIn_0.2s_ease-out]">
+              {errorMessage}
+            </div>
+          )}
+
           {/* Core Interface Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
             
@@ -49,7 +111,10 @@ export default function LoginPage() {
                   <button
                     key={role}
                     type="button"
-                    onClick={() => setFormData({ ...formData, role })}
+                    onClick={() => {
+                      setFormData({ ...formData, role });
+                      setErrorMessage('');
+                    }}
                     className={`h-8 rounded-lg text-xs font-semibold capitalize transition-all ${
                       formData.role === role 
                         ? 'bg-white text-indigo-600 shadow-sm' 
@@ -70,7 +135,13 @@ export default function LoginPage() {
                 <input 
                   type="email" 
                   required
-                  placeholder="name@example.com"
+                  placeholder={
+                    formData.role === 'student'
+                      ? 'sam.student@example.com'
+                      : formData.role === 'teacher'
+                      ? 'tara.teacher@edusnap.com'
+                      : 'ada.admin@edusnap.com'
+                  }
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   className="w-full h-11 pl-10 pr-4 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-900 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:bg-white transition-all"
@@ -132,7 +203,7 @@ export default function LoginPage() {
         </div>
       </div>
 
-      {/* RIGHT COLUMN: Catchy, beautifully animated dashboard layout visualization */}
+      {/* RIGHT COLUMN: Dashboard layout visualization */}
       <div className="hidden lg:flex lg:w-[55%] bg-slate-900 relative items-center justify-center overflow-hidden p-12">
         
         {/* Floating Glowing Aura Nodes */}
@@ -150,7 +221,7 @@ export default function LoginPage() {
               <div className="w-2.5 h-2.5 rounded-full bg-rose-500" />
               <div className="w-2.5 h-2.5 rounded-full bg-amber-500" />
               <div className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
-              <span className="text-[11px] font-bold text-slate-500 tracking-wider uppercase ml-2">Live Live Analytics Deck</span>
+              <span className="text-[11px] font-bold text-slate-500 tracking-wider uppercase ml-2">Live Analytics Deck</span>
             </div>
             <div className="px-2 py-0.5 bg-indigo-500/10 rounded border border-indigo-500/30 text-[10px] font-bold text-indigo-400">
               SYS ACTIVE
